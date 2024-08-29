@@ -1,0 +1,26 @@
+<odoo>
+    <!-- Inherit the existing form view of res.partner -->
+    <record id="view_res_partner_form_inherit" model="ir.ui.view">
+        <field name="name">res.partner.form.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <!-- Add new fields after the "name" field in the form view -->
+            <xpath expr="//field[@name='vat']" position="after">
+                <field name="registration_number"/>
+                <field name="capital"/>
+                <field name="commercial_register_date"/>
+                <field name="url"/>
+
+            </xpath>
+             <!-- Add a new tab for activity types -->
+        <xpath expr="//notebook" position="inside">
+            <page string="Activities">
+                <field name="activity_type_ids" />
+            </page>
+        </xpath>
+        </field>
+    </record>
+
+
+</odoo>

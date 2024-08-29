@@ -1,0 +1,64 @@
+<odoo>
+    <!-- Define the tree view for Company Activity -->
+    <record id="view_company_activity_tree" model="ir.ui.view">
+        <field name="name">company.activity.tree</field>
+        <field name="model">company.activity</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="activity_code"/>
+
+                <field name="name"/>
+                <field name="activity_description"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Define the search view for Company Activity -->
+    <record id="view_company_activity_search" model="ir.ui.view">
+        <field name="name">company.activity.search</field>
+        <field name="model">company.activity</field>
+        <field name="arch" type="xml">
+            <search>
+
+                <field name="name" filter_domain="['|',  ('name', 'ilike', self), ('activity_code', 'ilike', self)]"/>
+
+
+                <!-- Add other search fields as necessary -->
+            </search>
+        </field>
+    </record>
+
+    <!-- Define the form view for Company Activity -->
+    <record id="view_company_activity_form" model="ir.ui.view">
+        <field name="name">company.activity.form</field>
+        <field name="model">company.activity</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="activity_code"/>
+                        <field name="name"/>
+
+                        <field name="activity_description"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Define the action for Company Activity -->
+    <record id="action_company_activity" model="ir.actions.act_window">
+        <field name="name">Company Activities</field>
+        <field name="res_model">company.activity</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_company_activity_tree"/>
+        <field name="search_view_id" ref="view_company_activity_search"/>
+    </record>
+
+    <!-- Add the Company Activity menu item under the Configuration menu -->
+    <menuitem id="menu_company_activity"
+              name="Company Activities"
+              parent="contacts.res_partner_menu_config"
+              action="action_company_activity"
+              />
+</odoo>
